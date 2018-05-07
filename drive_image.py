@@ -18,7 +18,3 @@ def generate_part_sha1(filename, start):
 
     return sha1.hexdigest()
 
-# f = '/home/xiaoyu/dedupe_test_images/USBImage.img_20170814152825.img'
-# hash_l = generate_image_sha1(f)
-#
-# print hash_l

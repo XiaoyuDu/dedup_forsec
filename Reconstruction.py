@@ -1,26 +1,3 @@
-'''
-About this code:
-By using the data saved on server and their metadata stored in the database, reconstruct a forensiclly sound image.
-
-1> Creating a blank image, the size are same to the aimed one.
-2> Using dd put the files in this image.(including file data[84-105] and the slack data[107-114])
-3> Unallocated space data(deleted data)
-
-'''
-
-'''
-TO DO:
-1) Fragment file test [line 84-105], 
-This code was wrote in the way haddle with fragment files, but not test yet.
-So it works for assignmentImage, it could have problem in windows image test.
-
-2) Reconstructing files of dedupe image. 
-Now it only works for the whole iamge data collected in the same folder.
-By use the metadata in database, find out the known file on the other place.
-
-3) 
-
-'''
 
 
 import argparse
@@ -175,18 +152,6 @@ def construct(acquisition_id):
                     file_size -= count*fs_bs
                     print "index", index ,"start_block", start_block, "count", count, "end_block", end_block
 
-                # 3) - write the file slake into the image
-                # if slack_size > 0:
-                #     # bs = 1
-                #     slack_no += 1
-                #     slack_path = dedup_path + "_slack"
-                #     print  slack_path
-                #     slack_path = slack_path.replace(" ", "SPACE")
-                #     seek = fs_bs * int(end_block - ss_bs) + (block_size - int(slack_size))
-                #     print seek, slack_size
-                #     subprocess.Popen(args=['./File_Insert.sh', "%s" % str(slack_path), '%s' % str(target),
-                #                            '%s' % str(0),'%s' % str(seek),'%s' % str(slack_size),'%s' % str(1)])
-                #     total_slack_size += int(slack_size)
 
 
     # 4) - write unallocated data into the image.
@@ -209,8 +174,6 @@ def construct(acquisition_id):
         special_data(dedup_root_path, special_data_dir, target, fs_bs, total_insert_blocks)
 
     print total_insert_blocks, 'total_insert_blocks'
-    # print total_slack_size, "total_slack_size"
-    # print slack_no, "slack_no"
     print target
     reconstructed_image_hash = generate_image_sha1(target)
     print 'original hash is ', original_hash

@@ -1,23 +1,4 @@
-'''
-NOTES:
 
-This class receives metadata and checks whether or not the files are already availabe. Then it either writes them to an image or send a request for them.
-
-The process is multithreaded.
-'''
-
-'''
-TO DO:
-
-Work on the client side. Once you get pass sending the files to the server make sure that the image is working properly.
-Fragmentation should be dealt with making loop calls to the DD command using the starting and ending blocks... that we will need to get and send with the metadata
-
-
-
-Mark:
-TODO: Change existing communication method to the new send_msg and recv_msg functions
-
-'''
 
 import subprocess
 import datetime

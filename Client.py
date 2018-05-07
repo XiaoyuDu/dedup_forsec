@@ -1,26 +1,5 @@
-'''
-NOTES:
-
-This class takes reads from images and extracts file metadata. 
-It then inserts it into a queue to be sent to a server by independent threads.
-
-Right now it's only working with NTFS file systems but it'll be modified to deal with other formats, and unnallocated space.
-
-The idea is to end up reading the whole disk and extract the minimum necessary info to reconstruct it on the server side.
-In the future a reconstruction via partial hashing implementation will be attempted as an option with 
-the objetive of reducing read time.
-'''
-
-'''
-TO DO:
-
-File slack shold be send, even the file has existed in the server.
-Unaloocated space data only has been extracted, but not send through network to server.
 
 
-'''
-
-# from Acquisition import Acquisition
 from unallocated_space import get_continuous_unallocated_block, extract_unallocated_data
 from drive_image import generate_image_sha1, generate_part_sha1
 from extract_special_files import dd_extract_file, dd_extract_file_by_extension, dd_extract_duplicated_file_slack

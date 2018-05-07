@@ -50,56 +50,6 @@ def get_slack(f, partition_name):
 
     return data, s_size
 
-# def get_slack(full_image_path, f, block_size, file_name,fs_bs, partition_start, partition_name, image_data_dedup_path):
-#     """ Returns the slack space of the block. """
-#
-#     print "partition_start --", partition_start
-#     print "partition_name --", partition_name
-#
-#     # Walk all blocks allocated by this file as in some filesystems
-#     # each file has several attributes which can allocate multiple
-#     # blocks.
-#
-#     file_name = file_name.replace(" ","SPACE")
-#
-#     if "NTFS" in partition_name:
-#         bs_number = 1
-#     elif "FAT" in partition_name:
-#         bs_number = 8
-#
-#     input_data = full_image_path
-#     directory = image_data_dedup_path + os.sep + 'slack_space'
-#     try:
-#         if not os.path.exists(directory):
-#             os.makedirs(directory)
-#     except Exception:
-#         pass
-#     frag_end_block = 0
-#     data = 'None'
-#     file_size = f.info.meta.size
-#     slack_size = 4096 - file_size % 4096
-#
-#     for attr in f:
-#         for run in attr:
-#             frag_start_block = run.addr + partition_start
-#             frag_len = run.len
-#             frag_end_block = frag_start_block + frag_len
-#
-#     if not frag_end_block == 0:
-#     # # Last block of the file
-#         slack_offset = (frag_end_block - bs_number) * fs_bs + (4096 - slack_size)
-#         out_put = directory + os.sep + file_name + '_slack'
-#         subprocess.Popen(args=['./read_unallocated_data.sh', '%s' % str(input_data), '%s' % str(out_put),
-#                 '%s' % str(slack_offset), '%s' % str(slack_size), '%s' % str(1)]).wait()
-#         while True:
-#             if os.stat(out_put).st_size < slack_size:
-#                 continue
-#             else:
-#                 slack_file = open(out_put, "r")
-#                 data = slack_file.read()
-#                 slack_file.close()
-#                 break
-#     return data, slack_size
 
 def get_continuous_unallocated_block(drive_block_list):
     unallocated_block = []
